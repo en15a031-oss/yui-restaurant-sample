@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>空間 | 炭火割烹 結</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── メインギャラリー ── */
+    .gallery-main {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: 480px 240px;
+      gap: 8px;
+      margin-top: 48px;
+    }
+    .gallery-img {
+      background: linear-gradient(135deg, #3d2810 0%, #5c3a1e 50%, #2a1c0c 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .gallery-img:nth-child(2) { background: linear-gradient(160deg, #4a2e10, #3d2810); }
+    .gallery-img:nth-child(3) { background: linear-gradient(200deg, #2a1c0c, #5c3a1e); }
+    .gallery-img:nth-child(4) { background: linear-gradient(135deg, #3d2810, #6b4520); }
+    .gallery-img:nth-child(5) { background: linear-gradient(100deg, #5c3a1e, #2a1c0c); }
+    .gallery-img:first-child {
+      grid-row: span 2;
+    }
+    .gallery-img::after {
+      content: '写真';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.07);
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+    }
+
+    /* ── 室内紹介 ── */
+    .room-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      margin-top: 48px;
+    }
+    .room-card {
+      border: 1px solid rgba(201,168,76,0.15);
+      overflow: hidden;
+    }
+    .room-img {
+      aspect-ratio: 3/2;
+      background: linear-gradient(135deg, #3d2810, #5c3a1e);
+      position: relative;
+    }
+    .room-img::after {
+      content: '写真';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.07);
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+    }
+    .room-info {
+      padding: 28px 32px;
+      background: var(--bg-light);
+    }
+    .room-tag {
+      font-size: 0.62rem;
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .room-info h3 {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-bottom: 12px;
+      letter-spacing: 0.08em;
+    }
+    .room-info p {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      line-height: 1.9;
+    }
+    .room-capacity {
+      margin-top: 16px;
+      font-size: 0.78rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── こだわり詳細 ── */
+    .detail-bg {
+      background: var(--bg-mid);
+      padding: 80px 0;
+    }
+    .detail-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 48px;
+      border: 1px solid rgba(201,168,76,0.15);
+    }
+    .detail-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0;
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+    }
+    .detail-item:last-child { border-bottom: none; }
+    .detail-key {
+      padding: 28px 32px;
+      background: var(--bg-light);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      border-right: 1px solid rgba(201,168,76,0.15);
+      display: flex;
+      align-items: center;
+    }
+    .detail-val {
+      padding: 28px 32px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    /* ── CTAバナー ── */
+    .cta-banner {
+      text-align: center;
+      padding: 80px 48px;
+      border-top: 1px solid rgba(201,168,76,0.1);
+    }
+    .cta-banner h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+    .cta-banner p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .gallery-main { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .gallery-img { aspect-ratio: 3/2; }
+      .gallery-img:first-child { grid-row: span 1; }
+      .room-grid { grid-template-columns: 1fr; }
+      .detail-item { grid-template-columns: 1fr; }
+      .detail-key { border-right: none; border-bottom: 1px solid rgba(201,168,76,0.15); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">
+    炭火割烹 結
+    <span>SUMIBIYAKATA YUI / KITASHINCHI</span>
+  </a>
+  <nav>
+    <a href="menu.html">メニュー</a>
+    <a href="about.html">こだわり</a>
+    <a href="space.html" class="active">空間</a>
+    <a href="access.html">アクセス</a>
+    <a href="access.html" class="btn-reserve">ご予約</a>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <span class="section-label">SPACE</span>
+  <h1>空間</h1>
+</div>
+
+<!-- ギャラリー -->
+<div class="section-block">
+  <div class="reveal">
+    <span class="section-label">GALLERY</span>
+    <h2 class="section-title">
+      静かな個室で、<br>大切な時間を。
+    </h2>
+    <p class="section-text">
+      北新地の路地に佇む、全席個室の割烹。<br>
+      照明を落とした落ち着いた空間で、大切な方との夜をゆっくりお過ごしください。
+    </p>
+  </div>
+  <div class="gallery-main reveal">
+    <div class="gallery-img"></div>
+    <div class="gallery-img"></div>
+    <div class="gallery-img"></div>
+    <div class="gallery-img"></div>
+    <div class="gallery-img"></div>
+  </div>
+</div>
+
+<!-- 個室紹介 -->
+<div class="section-block" style="padding-top: 0;">
+  <div class="reveal">
+    <span class="section-label">PRIVATE ROOMS</span>
+    <h2 class="section-title">個室のご案内</h2>
+  </div>
+  <div class="room-grid">
+    <div class="room-card reveal">
+      <div class="room-img"></div>
+      <div class="room-info">
+        <div class="room-tag">ROOM A</div>
+        <h3>椿の間</h3>
+        <p>2〜4名様向けの落ち着いた個室。窓から北新地の夜景を望めます。記念日・お誕生日のご利用に。</p>
+        <div class="room-capacity">2〜4名様</div>
+      </div>
+    </div>
+    <div class="room-card reveal">
+      <div class="room-img"></div>
+      <div class="room-info">
+        <div class="room-tag">ROOM B</div>
+        <h3>松の間</h3>
+        <p>4〜8名様向けの広めの個室。接待や会食に最適。掘りごたつ仕様で、長時間でもゆったりお過ごしいただけます。</p>
+        <div class="room-capacity">4〜8名様</div>
+      </div>
+    </div>
+    <div class="room-card reveal">
+      <div class="room-img"></div>
+      <div class="room-info">
+        <div class="room-tag">ROOM C</div>
+        <h3>竹の間</h3>
+        <p>2名様専用の最も静かな個室。カウンター席で炭火焼きをご覧いただきながらお食事いただけます。</p>
+        <div class="room-capacity">2名様（カウンター）</div>
+      </div>
+    </div>
+    <div class="room-card reveal">
+      <div class="room-img"></div>
+      <div class="room-info">
+        <div class="room-tag">ROOM D</div>
+        <h3>梅の間</h3>
+        <p>8〜12名様向けの大型個室。企業の接待・懇親会・同窓会などにご利用いただいています。</p>
+        <div class="room-capacity">8〜12名様</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 設備詳細 -->
+<div class="detail-bg">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">FACILITY</span>
+      <h2 class="section-title">設備・サービス</h2>
+    </div>
+    <div class="detail-list reveal">
+      <div class="detail-item">
+        <div class="detail-key">個室</div>
+        <div class="detail-val">全4室（2名〜12名様まで対応可）</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-key">席タイプ</div>
+        <div class="detail-val">掘りごたつ・カウンター・テーブル席</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-key">Wi-Fi</div>
+        <div class="detail-val">全室完備</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-key">プロジェクター</div>
+        <div class="detail-val">松の間・梅の間に設置（要事前予約）</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-key">お祝い演出</div>
+        <div class="detail-val">デザートプレート・花束手配など承ります（要事前相談）</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-key">お子様</div>
+        <div class="detail-val">小学生以上のお子様はご同伴いただけます。お子様メニューもご用意可能です。</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-key">駐車場</div>
+        <div class="detail-val">店舗専用駐車場はございません。近隣のコインパーキングをご利用ください。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-banner reveal">
+  <h2>ご予約・お問い合わせ</h2>
+  <p>特別なご要望もお気軽にご相談ください。</p>
+  <a href="access.html" class="btn-primary">ご予約はこちら</a>
+</div>
+
+<footer>
+  <div class="footer-logo">
+    炭火割烹 結
+    <span>© 2026 SUMIBIYAKATA YUI. ALL RIGHTS RESERVED.</span>
+  </div>
+  <div class="footer-copy">大阪市北区堂島 / 完全予約制</div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

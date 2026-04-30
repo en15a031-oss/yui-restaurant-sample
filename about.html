@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>こだわり | 炭火割烹 結</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── こだわりブロック ── */
+    .kodawari-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      padding: 80px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+      border-bottom: 1px solid rgba(201,168,76,0.08);
+    }
+    .kodawari-block.reverse { direction: rtl; }
+    .kodawari-block.reverse > * { direction: ltr; }
+    .kodawari-img {
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #3d2810 0%, #6b4520 60%, #2a1c0c 100%);
+      position: relative;
+    }
+    .kodawari-img::after {
+      content: '写真';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.08);
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+    }
+    .kodawari-num {
+      font-family: var(--serif);
+      font-size: 4rem;
+      font-weight: 300;
+      color: rgba(201,168,76,0.15);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    /* ── 生産者ブロック ── */
+    .producer-bg {
+      background: var(--bg-mid);
+      padding: 80px 0;
+    }
+    .producer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .producer-card {
+      border: 1px solid rgba(201,168,76,0.15);
+      padding: 32px;
+    }
+    .producer-region {
+      font-size: 0.62rem;
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .producer-card h3 {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+    }
+    .producer-card p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.9;
+    }
+
+    /* ── 店主について ── */
+    .chef-inner {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .chef-img {
+      aspect-ratio: 3/4;
+      background: linear-gradient(160deg, #3d2810, #5c3a1e, #1a1209);
+      position: relative;
+    }
+    .chef-img::after {
+      content: '写真';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.08);
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+    }
+    .chef-name {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+    .chef-name-en {
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      margin-bottom: 32px;
+    }
+    .chef-history {
+      margin-top: 32px;
+      border-top: 1px solid rgba(201,168,76,0.15);
+      padding-top: 32px;
+    }
+    .chef-history h4 {
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .history-item {
+      display: flex;
+      gap: 24px;
+      font-size: 0.83rem;
+      margin-bottom: 12px;
+      color: var(--text-muted);
+    }
+    .history-year {
+      color: var(--gold);
+      flex-shrink: 0;
+      width: 56px;
+    }
+
+    @media (max-width: 768px) {
+      .kodawari-block { grid-template-columns: 1fr; gap: 32px; }
+      .kodawari-block.reverse { direction: ltr; }
+      .kodawari-img { display: none; }
+      .producer-grid { grid-template-columns: 1fr; }
+      .chef-inner { grid-template-columns: 1fr; }
+      .chef-img { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">
+    炭火割烹 結
+    <span>SUMIBIYAKATA YUI / KITASHINCHI</span>
+  </a>
+  <nav>
+    <a href="menu.html">メニュー</a>
+    <a href="about.html" class="active">こだわり</a>
+    <a href="space.html">空間</a>
+    <a href="access.html">アクセス</a>
+    <a href="access.html" class="btn-reserve">ご予約</a>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <span class="section-label">COMMITMENT</span>
+  <h1>こだわり</h1>
+</div>
+
+<!-- こだわり1：素材 -->
+<div class="kodawari-block">
+  <div class="kodawari-img reveal"></div>
+  <div class="reveal">
+    <div class="kodawari-num">01</div>
+    <span class="section-label">INGREDIENTS</span>
+    <h2 class="section-title">産地直送の素材</h2>
+    <div class="divider"></div>
+    <p class="section-text">
+      京都・丹波、滋賀・近江、兵庫・丹波篠山。
+      信頼できる生産者から毎朝直送される食材だけを使用します。
+      化学調味料は一切使用しません。<br><br>
+      献立はその日の朝、届いた食材を見てから決めます。
+      決まった型を持たないのは、素材の声を聞くため。
+      一番良い状態で、一番良い調理法で食べていただきたいから。
+    </p>
+  </div>
+</div>
+
+<!-- こだわり2：炭火 -->
+<div class="kodawari-block reverse">
+  <div class="kodawari-img reveal"></div>
+  <div class="reveal">
+    <div class="kodawari-num">02</div>
+    <span class="section-label">CHARCOAL</span>
+    <h2 class="section-title">備長炭の遠赤外線</h2>
+    <div class="divider"></div>
+    <p class="section-text">
+      紀州備長炭の遠赤外線が、素材の芯まで均一に熱を届けます。
+      表面を素早く固めて旨味を閉じ込め、中はしっとりと。
+      ガスや電気では出せない、炭火だけの焼き上がりがあります。<br><br>
+      炭の火加減を読む技術は、数年かけて身につくもの。
+      その日の気温・湿度・食材の厚みによって、
+      炭との距離と時間を変えながら焼いています。
+    </p>
+  </div>
+</div>
+
+<!-- こだわり3：空間 -->
+<div class="kodawari-block">
+  <div class="kodawari-img reveal"></div>
+  <div class="reveal">
+    <div class="kodawari-num">03</div>
+    <span class="section-label">SPACE</span>
+    <h2 class="section-title">静かな個室空間</h2>
+    <div class="divider"></div>
+    <p class="section-text">
+      全席個室。接待から記念日まで、
+      ゆったりと過ごせる空間をご用意しています。<br><br>
+      食事の時間に、余計なものはいりません。
+      照明を落とし、静けさを保つ。
+      目の前の方との会話と、目の前の料理だけに集中できる。
+      そういう夜を、この場所でつくりたいと思っています。
+    </p>
+  </div>
+</div>
+
+<!-- 生産者 -->
+<div class="producer-bg">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">PRODUCERS</span>
+      <h2 class="section-title">信頼する生産者たち</h2>
+      <p class="section-text">直接顔を見て、話をして、信頼できると思った方からだけ仕入れています。</p>
+    </div>
+    <div class="producer-grid">
+      <div class="producer-card reveal">
+        <div class="producer-region">SHIGA / 近江</div>
+        <h3>吉田牧場</h3>
+        <p>近江牛の中でも特に脂の質にこだわる吉田牧場。霜降りの美しさより、赤身の旨みを大切にした育て方が特徴。</p>
+      </div>
+      <div class="producer-card reveal">
+        <div class="producer-region">KYOTO / 丹波</div>
+        <h3>松本農園</h3>
+        <p>農薬を極力使わず育てる京野菜の生産者。季節の野菜を毎朝収穫して発送。土の香りごと届けてもらっています。</p>
+      </div>
+      <div class="producer-card reveal">
+        <div class="producer-region">HYOGO / 丹波篠山</div>
+        <h3>中谷養鶏</h3>
+        <p>丹波地鶏を平飼いで育てる中谷養鶏。広いスペースでのびのびと育った鶏は、歯ごたえと旨みが違います。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 店主 -->
+<div class="section-block">
+  <div class="chef-inner">
+    <div class="chef-img reveal"></div>
+    <div class="reveal">
+      <span class="section-label">CHEF</span>
+      <div class="chef-name">田中 誠一</div>
+      <div class="chef-name-en">SEIICHI TANAKA</div>
+      <p class="section-text">
+        大阪・堺の料亭に生まれ、物心ついた頃から厨房の匂いの中で育ちました。
+        20代は東京・京都で修業を重ね、30代で北新地に独立。<br><br>
+        「料理は素材が九割」と信じています。
+        だから仕入れに一番時間をかける。
+        生産者の顔が見えるものだけを、炭火で丁寧に。
+        それだけを続けてきた場所が、この「結」です。
+      </p>
+      <div class="chef-history">
+        <h4>CAREER</h4>
+        <div class="history-item"><span class="history-year">1998</span><span>大阪・堺の老舗料亭にて修業開始</span></div>
+        <div class="history-item"><span class="history-year">2003</span><span>東京・銀座の日本料理店へ移籍</span></div>
+        <div class="history-item"><span class="history-year">2008</span><span>京都・祇園の割烹にて炭火焼きを修業</span></div>
+        <div class="history-item"><span class="history-year">2014</span><span>大阪・北新地にて「炭火割烹 結」開店</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">
+    炭火割烹 結
+    <span>© 2026 SUMIBIYAKATA YUI. ALL RIGHTS RESERVED.</span>
+  </div>
+  <div class="footer-copy">大阪市北区堂島 / 完全予約制</div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

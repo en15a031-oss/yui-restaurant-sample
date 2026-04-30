@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アクセス・予約 | 炭火割烹 結</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── アクセスレイアウト ── */
+    .access-layout {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 64px;
+      align-items: start;
+    }
+    .map-area {
+      position: sticky;
+      top: 100px;
+    }
+    .map-placeholder {
+      aspect-ratio: 4/3;
+      background: var(--bg-light);
+      border: 1px solid rgba(201,168,76,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      margin-bottom: 16px;
+    }
+    .map-address {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+    .map-link {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(201,168,76,0.3);
+      padding-bottom: 2px;
+    }
+    .map-link:hover { border-color: var(--gold); }
+
+    /* ── 店舗情報 ── */
+    .info-table {
+      border: 1px solid rgba(201,168,76,0.15);
+      margin-bottom: 48px;
+    }
+    .info-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-key {
+      padding: 20px 24px;
+      background: var(--bg-light);
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      border-right: 1px solid rgba(201,168,76,0.1);
+      display: flex;
+      align-items: center;
+    }
+    .info-val {
+      padding: 20px 24px;
+      font-size: 0.87rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    /* ── 予約フォーム ── */
+    .form-section {
+      background: var(--bg-mid);
+      padding: 80px 0;
+    }
+    .form-wrap {
+      max-width: 640px;
+      margin: 48px auto 0;
+    }
+    .form-row {
+      margin-bottom: 28px;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .form-label .required {
+      font-size: 0.6rem;
+      color: #e07070;
+      margin-left: 8px;
+      letter-spacing: 0.1em;
+    }
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      background: var(--bg-light);
+      border: 1px solid rgba(201,168,76,0.2);
+      color: var(--text);
+      padding: 14px 16px;
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--gold);
+    }
+    .form-input::placeholder, .form-textarea::placeholder {
+      color: rgba(184,169,138,0.4);
+    }
+    .form-textarea {
+      height: 140px;
+      resize: vertical;
+    }
+    .form-select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+    .form-select option { background: var(--bg); }
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .form-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+      line-height: 1.7;
+    }
+    .form-submit {
+      width: 100%;
+      padding: 18px;
+      background: var(--gold);
+      color: var(--bg);
+      border: none;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      letter-spacing: 0.2em;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .form-submit:hover { background: var(--gold-light); }
+
+    /* ── 電話予約 ── */
+    .tel-box {
+      border: 1px solid rgba(201,168,76,0.2);
+      padding: 40px;
+      text-align: center;
+      margin-top: 80px;
+    }
+    .tel-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .tel-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+    .tel-hours {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+      .access-layout { grid-template-columns: 1fr; }
+      .map-area { position: static; }
+      .form-grid-2 { grid-template-columns: 1fr; }
+      .info-row { grid-template-columns: 1fr; }
+      .info-key { border-right: none; border-bottom: 1px solid rgba(201,168,76,0.1); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">
+    炭火割烹 結
+    <span>SUMIBIYAKATA YUI / KITASHINCHI</span>
+  </a>
+  <nav>
+    <a href="menu.html">メニュー</a>
+    <a href="about.html">こだわり</a>
+    <a href="space.html">空間</a>
+    <a href="access.html" class="active">アクセス</a>
+    <a href="access.html" class="btn-reserve">ご予約</a>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <span class="section-label">ACCESS & RESERVATION</span>
+  <h1>アクセス・ご予約</h1>
+</div>
+
+<!-- アクセス -->
+<div class="section-block">
+  <div class="access-layout">
+    <div class="reveal">
+      <span class="section-label">SHOP INFO</span>
+      <h2 class="section-title">店舗情報</h2>
+      <div class="divider"></div>
+      <div class="info-table">
+        <div class="info-row">
+          <div class="info-key">店舗名</div>
+          <div class="info-val">炭火割烹 結（すみびかっぽう ゆい）</div>
+        </div>
+        <div class="info-row">
+          <div class="info-key">住所</div>
+          <div class="info-val">〒530-0004<br>大阪府大阪市北区堂島1丁目○-○<br>北新地エリア</div>
+        </div>
+        <div class="info-row">
+          <div class="info-key">アクセス</div>
+          <div class="info-val">
+            JR東西線「北新地駅」より徒歩3分<br>
+            阪急「梅田駅」より徒歩8分<br>
+            地下鉄四つ橋線「西梅田駅」より徒歩5分
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-key">営業時間</div>
+          <div class="info-val">
+            17:30〜23:00（L.O. 21:30）<br>
+            ※完全予約制
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-key">定休日</div>
+          <div class="info-val">日曜日・月曜日<br>（祝日は営業する場合がございます）</div>
+        </div>
+        <div class="info-row">
+          <div class="info-key">電話</div>
+          <div class="info-val">06-XXXX-XXXX</div>
+        </div>
+        <div class="info-row">
+          <div class="info-key">駐車場</div>
+          <div class="info-val">専用駐車場はございません。近隣のコインパーキングをご利用ください。</div>
+        </div>
+      </div>
+    </div>
+    <div class="map-area reveal">
+      <div class="map-placeholder">地図</div>
+      <p class="map-address">〒530-0004<br>大阪府大阪市北区堂島1丁目○-○</p>
+      <a href="#" class="map-link">Google マップで開く →</a>
+    </div>
+  </div>
+</div>
+
+<!-- 予約フォーム -->
+<div class="form-section">
+  <div class="container">
+    <div class="reveal" style="text-align: center;">
+      <span class="section-label">RESERVATION</span>
+      <h2 class="section-title">ご予約フォーム</h2>
+      <p class="section-text" style="max-width: 480px; margin: 0 auto;">
+        ご予約はフォームまたはお電話にて承っております。<br>
+        前日・当日のご予約はお電話にてご連絡ください。
+      </p>
+    </div>
+    <div class="form-wrap reveal">
+      <form>
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label class="form-label">お名前 <span class="required">必須</span></label>
+            <input class="form-input" type="text" placeholder="田中 誠一">
+          </div>
+          <div class="form-row">
+            <label class="form-label">フリガナ <span class="required">必須</span></label>
+            <input class="form-input" type="text" placeholder="タナカ セイイチ">
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="form-label">電話番号 <span class="required">必須</span></label>
+          <input class="form-input" type="tel" placeholder="090-0000-0000">
+        </div>
+        <div class="form-row">
+          <label class="form-label">メールアドレス</label>
+          <input class="form-input" type="email" placeholder="example@email.com">
+        </div>
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label class="form-label">ご希望日 <span class="required">必須</span></label>
+            <input class="form-input" type="date">
+          </div>
+          <div class="form-row">
+            <label class="form-label">ご希望時間 <span class="required">必須</span></label>
+            <select class="form-select">
+              <option value="">選択してください</option>
+              <option>17:30〜</option>
+              <option>18:00〜</option>
+              <option>18:30〜</option>
+              <option>19:00〜</option>
+              <option>19:30〜</option>
+              <option>20:00〜</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label class="form-label">人数 <span class="required">必須</span></label>
+            <select class="form-select">
+              <option value="">選択してください</option>
+              <option>2名</option>
+              <option>3名</option>
+              <option>4名</option>
+              <option>5〜8名</option>
+              <option>9〜12名</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label class="form-label">コース</label>
+            <select class="form-select">
+              <option value="">選択してください</option>
+              <option>おまかせコース（¥12,000〜）</option>
+              <option>接待・記念日コース（¥18,000〜）</option>
+              <option>未定・相談したい</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="form-label">アレルギー・苦手な食材</label>
+          <input class="form-input" type="text" placeholder="例：エビ、カニ">
+        </div>
+        <div class="form-row">
+          <label class="form-label">ご要望・ご質問</label>
+          <textarea class="form-textarea" placeholder="記念日・接待などのご要望、お祝いの演出など、お気軽にご記入ください。"></textarea>
+        </div>
+        <div class="form-note">
+          ご予約確認のご連絡を、2営業日以内にお電話またはメールにてご返信いたします。
+        </div>
+        <button type="submit" class="form-submit">予約リクエストを送る</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- 電話予約 -->
+<div class="section-block" style="padding-bottom: 40px;">
+  <div class="tel-box reveal">
+    <div class="tel-label">TEL RESERVATION</div>
+    <div class="tel-num">06-XXXX-XXXX</div>
+    <div class="tel-hours">受付時間：火〜土 12:00〜17:00（営業日）</div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">
+    炭火割烹 結
+    <span>© 2026 SUMIBIYAKATA YUI. ALL RIGHTS RESERVED.</span>
+  </div>
+  <div class="footer-copy">大阪市北区堂島 / 完全予約制</div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

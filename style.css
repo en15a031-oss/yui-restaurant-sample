@@ -1,0 +1,212 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #1a1209;
+  --bg-mid: #241a0e;
+  --bg-light: #2e2214;
+  --text: #f5f0e8;
+  --text-muted: #b8a98a;
+  --gold: #c9a84c;
+  --gold-light: #e2c87a;
+  --serif: 'Noto Serif JP', serif;
+  --sans: 'Noto Sans JP', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+/* ── ヘッダー ── */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 48px;
+  background: rgba(26,18,9,0.97);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+}
+.logo {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-decoration: none;
+}
+.logo span {
+  display: block;
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  letter-spacing: 0.3em;
+  margin-top: 2px;
+}
+nav {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  transition: color 0.2s;
+}
+nav a:hover, nav a.active { color: var(--gold); }
+.btn-reserve {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold) !important;
+  padding: 8px 20px;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-reserve:hover {
+  background: var(--gold);
+  color: var(--bg) !important;
+}
+
+/* ── フッター ── */
+footer {
+  border-top: 1px solid rgba(201,168,76,0.15);
+  padding: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.footer-logo {
+  font-family: var(--serif);
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+}
+.footer-logo span {
+  display: block;
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  letter-spacing: 0.25em;
+  margin-top: 4px;
+}
+.footer-copy {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+/* ── ページヒーロー（トップ以外） ── */
+.page-hero {
+  padding-top: 140px;
+  padding-bottom: 64px;
+  text-align: center;
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+  margin-bottom: 0;
+}
+.page-hero .section-label {
+  margin-bottom: 16px;
+}
+.page-hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 300;
+  letter-spacing: 0.1em;
+}
+
+/* ── 共通セクション ── */
+.section-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.5em;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: block;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.section-text {
+  color: var(--text-muted);
+  font-size: 0.93rem;
+  line-height: 2;
+}
+.divider {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  margin: 20px 0;
+}
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+.section-block {
+  padding: 80px 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ── ボタン ── */
+.btn-primary {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--bg);
+  padding: 14px 36px;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-decoration: none;
+  transition: background 0.2s;
+  font-family: var(--sans);
+}
+.btn-primary:hover { background: var(--gold-light); }
+.btn-outline {
+  display: inline-block;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 12px 32px;
+  font-size: 0.82rem;
+  letter-spacing: 0.15em;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-outline:hover {
+  background: var(--gold);
+  color: var(--bg);
+}
+
+/* ── フェードイン ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── レスポンシブ ── */
+@media (max-width: 768px) {
+  header { padding: 16px 24px; }
+  nav { gap: 16px; }
+  nav a:not(.btn-reserve) { display: none; }
+  .section-block { padding: 60px 24px; }
+  .container { padding: 0 24px; }
+  footer { flex-direction: column; gap: 16px; text-align: center; padding: 40px 24px; }
+}

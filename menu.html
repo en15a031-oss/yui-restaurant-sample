@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>メニュー | 炭火割烹 結</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── コース ── */
+    .course-block {
+      border: 1px solid rgba(201,168,76,0.15);
+      margin-bottom: 32px;
+      overflow: hidden;
+    }
+    .course-header {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 0;
+    }
+    .course-img {
+      aspect-ratio: 16/7;
+      background: linear-gradient(135deg, #3d2810 0%, #6b4520 50%, #2a1c0c 100%);
+      position: relative;
+    }
+    .course-img::after {
+      content: '料理写真';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.08);
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+    }
+    .course-info {
+      padding: 48px 40px;
+      background: var(--bg-light);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .course-tag {
+      font-size: 0.62rem;
+      letter-spacing: 0.45em;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .course-name {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+    .course-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 2;
+      margin-bottom: 24px;
+    }
+    .course-price {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+    }
+    .course-price small {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      font-family: var(--sans);
+    }
+    .course-body {
+      padding: 40px;
+      border-top: 1px solid rgba(201,168,76,0.1);
+    }
+    .course-flow {
+      display: flex;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+    .course-flow-item {
+      text-align: center;
+      padding: 0 24px;
+      position: relative;
+      flex: 1;
+      min-width: 80px;
+    }
+    .course-flow-item::after {
+      content: '→';
+      position: absolute;
+      right: -6px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gold);
+      font-size: 0.7rem;
+    }
+    .course-flow-item:last-child::after { display: none; }
+    .flow-num {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .flow-name {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ── 単品 ── */
+    .alacarte-section {
+      background: var(--bg-mid);
+      padding: 80px 0;
+    }
+    .alacarte-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.15);
+      margin-top: 48px;
+    }
+    .alacarte-item {
+      background: var(--bg-mid);
+      padding: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+    }
+    .alacarte-name {
+      font-family: var(--serif);
+      font-size: 0.95rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+    }
+    .alacarte-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .alacarte-price {
+      font-size: 0.88rem;
+      color: var(--gold);
+      flex-shrink: 0;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── ドリンク ── */
+    .drink-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .drink-card {
+      border: 1px solid rgba(201,168,76,0.15);
+      padding: 32px 28px;
+    }
+    .drink-category {
+      font-size: 0.62rem;
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .drink-card h3 {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+    .drink-card p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.9;
+      margin-bottom: 16px;
+    }
+    .drink-price {
+      font-size: 0.82rem;
+      color: var(--gold);
+    }
+
+    /* ── 注意事項 ── */
+    .notes {
+      background: var(--bg-light);
+      border: 1px solid rgba(201,168,76,0.1);
+      padding: 40px;
+      margin-top: 48px;
+    }
+    .notes h3 {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 20px;
+      letter-spacing: 0.08em;
+    }
+    .notes ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .notes li {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      padding-left: 20px;
+      position: relative;
+    }
+    .notes li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+    }
+
+    @media (max-width: 768px) {
+      .course-header { grid-template-columns: 1fr; }
+      .course-img { display: none; }
+      .alacarte-grid { grid-template-columns: 1fr; }
+      .drink-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">
+    炭火割烹 結
+    <span>SUMIBIYAKATA YUI / KITASHINCHI</span>
+  </a>
+  <nav>
+    <a href="menu.html" class="active">メニュー</a>
+    <a href="about.html">こだわり</a>
+    <a href="space.html">空間</a>
+    <a href="access.html">アクセス</a>
+    <a href="access.html" class="btn-reserve">ご予約</a>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <span class="section-label">MENU</span>
+  <h1>メニュー</h1>
+</div>
+
+<!-- コース -->
+<div class="section-block">
+  <div class="reveal">
+    <span class="section-label">COURSE</span>
+    <h2 class="section-title">コース料理</h2>
+    <p class="section-text">
+      すべてのコースは完全予約制です。アレルギー・苦手な食材はご予約時にお知らせください。
+    </p>
+  </div>
+
+  <div style="margin-top: 48px;">
+    <div class="course-block reveal">
+      <div class="course-header">
+        <div class="course-img"></div>
+        <div class="course-info">
+          <div class="course-tag">STANDARD</div>
+          <div class="course-name">おまかせコース</div>
+          <p class="course-desc">
+            その日の素材で店主が組む、全8品のコース。
+            炭火焼きを中心に、旬の味わいをお届けします。
+          </p>
+          <div class="course-price">¥12,000 <small>（税込・サービス料別）</small></div>
+        </div>
+      </div>
+      <div class="course-body">
+        <div class="course-flow">
+          <div class="course-flow-item"><div class="flow-num">01</div><div class="flow-name">先付</div></div>
+          <div class="course-flow-item"><div class="flow-num">02</div><div class="flow-name">前菜</div></div>
+          <div class="course-flow-item"><div class="flow-num">03</div><div class="flow-name">椀物</div></div>
+          <div class="course-flow-item"><div class="flow-num">04</div><div class="flow-name">造り</div></div>
+          <div class="course-flow-item"><div class="flow-num">05</div><div class="flow-name">炭火焼</div></div>
+          <div class="course-flow-item"><div class="flow-num">06</div><div class="flow-name">炊合せ</div></div>
+          <div class="course-flow-item"><div class="flow-num">07</div><div class="flow-name">土鍋飯</div></div>
+          <div class="course-flow-item"><div class="flow-num">08</div><div class="flow-name">甘味</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-block reveal">
+      <div class="course-header">
+        <div class="course-img"></div>
+        <div class="course-info">
+          <div class="course-tag">SPECIAL</div>
+          <div class="course-name">接待・記念日コース</div>
+          <p class="course-desc">
+            特別な夜のための全10品コース。
+            季節の食材をふんだんに使い、一品一品丁寧に仕上げます。
+            お祝いのデザートプレートもご用意できます。
+          </p>
+          <div class="course-price">¥18,000 <small>（税込・サービス料別）</small></div>
+        </div>
+      </div>
+      <div class="course-body">
+        <div class="course-flow">
+          <div class="course-flow-item"><div class="flow-num">01</div><div class="flow-name">先付</div></div>
+          <div class="course-flow-item"><div class="flow-num">02</div><div class="flow-name">前菜盛</div></div>
+          <div class="course-flow-item"><div class="flow-num">03</div><div class="flow-name">椀物</div></div>
+          <div class="course-flow-item"><div class="flow-num">04</div><div class="flow-name">造り</div></div>
+          <div class="course-flow-item"><div class="flow-num">05</div><div class="flow-name">焼物</div></div>
+          <div class="course-flow-item"><div class="flow-num">06</div><div class="flow-name">炭火焼</div></div>
+          <div class="course-flow-item"><div class="flow-num">07</div><div class="flow-name">炊合せ</div></div>
+          <div class="course-flow-item"><div class="flow-num">08</div><div class="flow-name">土鍋飯</div></div>
+          <div class="course-flow-item"><div class="flow-num">09</div><div class="flow-name">水物</div></div>
+          <div class="course-flow-item"><div class="flow-num">10</div><div class="flow-name">甘味</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 単品 -->
+<div class="alacarte-section">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">À LA CARTE</span>
+      <h2 class="section-title">単品メニュー</h2>
+      <p class="section-text">炭火焼きを中心とした単品もご用意しています。コースと組み合わせてお楽しみください。</p>
+    </div>
+    <div class="alacarte-grid reveal">
+      <div class="alacarte-item">
+        <div><div class="alacarte-name">近江牛 サーロイン</div><div class="alacarte-sub">炭火焼き・100g</div></div>
+        <div class="alacarte-price">¥3,800</div>
+      </div>
+      <div class="alacarte-item">
+        <div><div class="alacarte-name">京地鶏 もも・むね盛り合わせ</div><div class="alacarte-sub">炭火焼き</div></div>
+        <div class="alacarte-price">¥1,600</div>
+      </div>
+      <div class="alacarte-item">
+        <div><div class="alacarte-name">丹波黒豚 バラ串</div><div class="alacarte-sub">炭火焼き・2本</div></div>
+        <div class="alacarte-price">¥1,200</div>
+      </div>
+      <div class="alacarte-item">
+        <div><div class="alacarte-name">旬魚の炭火焼き</div><div class="alacarte-sub">本日の仕入れにより異なります</div></div>
+        <div class="alacarte-price">¥1,400〜</div>
+      </div>
+      <div class="alacarte-item">
+        <div><div class="alacarte-name">季節野菜の炭火焼き</div><div class="alacarte-sub">盛り合わせ</div></div>
+        <div class="alacarte-price">¥900</div>
+      </div>
+      <div class="alacarte-item">
+        <div><div class="alacarte-name">土鍋ご飯</div><div class="alacarte-sub">近江米・2〜3人前</div></div>
+        <div class="alacarte-price">¥1,000</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ドリンク -->
+<div class="section-block">
+  <div class="reveal">
+    <span class="section-label">DRINK</span>
+    <h2 class="section-title">ドリンク</h2>
+  </div>
+  <div class="drink-grid">
+    <div class="drink-card reveal">
+      <div class="drink-category">SAKE</div>
+      <h3>日本酒</h3>
+      <p>全国各地から厳選した季節の一本を常時10種ご用意。ペアリングのご相談はスタッフまで。</p>
+      <div class="drink-price">¥800〜</div>
+    </div>
+    <div class="drink-card reveal">
+      <div class="drink-category">WINE</div>
+      <h3>ワイン</h3>
+      <p>和食に合う国産ワインを中心に、フランス・イタリアの銘柄もご用意しています。</p>
+      <div class="drink-price">グラス ¥900〜 / ボトル ¥5,500〜</div>
+    </div>
+    <div class="drink-card reveal">
+      <div class="drink-category">OTHERS</div>
+      <h3>焼酎・その他</h3>
+      <p>本格焼酎・梅酒・ノンアルコールカクテルなど幅広くご用意しています。</p>
+      <div class="drink-price">¥600〜</div>
+    </div>
+  </div>
+
+  <div class="notes reveal">
+    <h3>ご利用にあたって</h3>
+    <ul>
+      <li>コース料理はすべて完全予約制です。当日のご予約はお電話にてご確認ください。</li>
+      <li>アレルギー・苦手な食材がございましたら、ご予約時にお知らせください。</li>
+      <li>表示価格は税込です。別途サービス料10%をいただきます。</li>
+      <li>メニュー内容は仕入れ状況により変更になる場合がございます。</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">
+    炭火割烹 結
+    <span>© 2026 SUMIBIYAKATA YUI. ALL RIGHTS RESERVED.</span>
+  </div>
+  <div class="footer-copy">大阪市北区堂島 / 完全予約制</div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

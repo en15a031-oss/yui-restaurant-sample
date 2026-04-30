@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>炭火割烹 結 | 大阪・北新地</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── ヒーロー ── */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(26,18,9,0.2) 0%, rgba(26,18,9,0.55) 55%, var(--bg) 100%),
+        radial-gradient(ellipse at 60% 40%, #6b4520 0%, #1a1209 70%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    .hero-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.45em;
+      color: var(--gold);
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+    .hero-sub {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 48px;
+      line-height: 2;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+    }
+    .btn-secondary {
+      display: inline-block;
+      border: 1px solid var(--text-muted);
+      color: var(--text-muted);
+      padding: 14px 36px;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 0.62rem;
+      letter-spacing: 0.35em;
+    }
+    .scroll-hint::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--text-muted), transparent);
+      animation: scrollLine 1.6s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%   { opacity: 1; transform: scaleY(1);   transform-origin: top; }
+      100% { opacity: 0; transform: scaleY(0);   transform-origin: top; }
+    }
+
+    /* ── コンセプト ── */
+    .concept-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .concept-img {
+      aspect-ratio: 4/5;
+      background: linear-gradient(135deg, #3d2810 0%, #6b4520 50%, #2a1c0c 100%);
+      position: relative;
+    }
+    .concept-img::after {
+      content: '写真';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.08);
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+    }
+
+    /* ── ピックアップリンク ── */
+    .pickup-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 0;
+      border: 1px solid rgba(201,168,76,0.15);
+    }
+    .pickup-item {
+      padding: 48px 40px;
+      border-right: 1px solid rgba(201,168,76,0.15);
+      text-decoration: none;
+      color: var(--text);
+      transition: background 0.2s;
+      display: block;
+    }
+    .pickup-item:last-child { border-right: none; }
+    .pickup-item:hover { background: var(--bg-mid); }
+    .pickup-thumb {
+      aspect-ratio: 3/2;
+      background: linear-gradient(135deg, #3d2810, #5c3a1e);
+      margin-bottom: 24px;
+      position: relative;
+    }
+    .pickup-thumb::after {
+      content: '写真';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.08);
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+    }
+    .pickup-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .pickup-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+    .pickup-text {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.9;
+    }
+    .pickup-more {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+    }
+
+    /* ── お知らせ ── */
+    .news-bg {
+      background: var(--bg-mid);
+      padding: 80px 0;
+    }
+    .news-list {
+      margin-top: 40px;
+      border-top: 1px solid rgba(201,168,76,0.15);
+    }
+    .news-item {
+      display: flex;
+      gap: 32px;
+      align-items: baseline;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+      text-decoration: none;
+      color: var(--text-muted);
+      transition: color 0.2s;
+      font-size: 0.88rem;
+    }
+    .news-item:hover { color: var(--text); }
+    .news-date {
+      font-size: 0.75rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+      width: 100px;
+    }
+
+    /* ── アクセス概要 ── */
+    .access-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid rgba(201,168,76,0.15);
+      margin-top: 48px;
+    }
+    .access-bar-item {
+      padding: 32px 28px;
+      border-right: 1px solid rgba(201,168,76,0.15);
+    }
+    .access-bar-item:last-child { border-right: none; }
+    .access-bar-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.35em;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .access-bar-val {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 768px) {
+      .concept-inner { grid-template-columns: 1fr; }
+      .concept-img { display: none; }
+      .pickup-grid { grid-template-columns: 1fr; }
+      .pickup-item { border-right: none; border-bottom: 1px solid rgba(201,168,76,0.15); }
+      .pickup-item:last-child { border-bottom: none; }
+      .access-bar { grid-template-columns: 1fr 1fr; }
+      .access-bar-item:nth-child(2) { border-right: none; }
+      .access-bar-item { border-bottom: 1px solid rgba(201,168,76,0.15); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">
+    炭火割烹 結
+    <span>SUMIBIYAKATA YUI / KITASHINCHI</span>
+  </a>
+  <nav>
+    <a href="menu.html">メニュー</a>
+    <a href="about.html">こだわり</a>
+    <a href="space.html">空間</a>
+    <a href="access.html">アクセス</a>
+    <a href="access.html" class="btn-reserve">ご予約</a>
+  </nav>
+</header>
+
+<!-- ヒーロー -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag">OSAKA KITASHINCHI / CHARCOAL CUISINE</div>
+    <h1>
+      素材と、火と、<br><em>静かな時間を。</em>
+    </h1>
+    <p class="hero-sub">
+      産地直送の食材を、炭火でただ丁寧に。<br>
+      北新地の小さな割烹で、本物の味をご用意しています。
+    </p>
+    <div class="hero-btns">
+      <a href="access.html" class="btn-primary">ご予約はこちら</a>
+      <a href="menu.html" class="btn-secondary">メニューを見る</a>
+    </div>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</section>
+
+<!-- コンセプト -->
+<div class="section-block">
+  <div class="concept-inner">
+    <div class="concept-img reveal"></div>
+    <div class="reveal">
+      <span class="section-label">CONCEPT</span>
+      <h2 class="section-title">
+        手をかけすぎない。<br>だから、素材が活きる。
+      </h2>
+      <div class="divider"></div>
+      <p class="section-text">
+        炭火は、正直です。余計なものを足さなくても、
+        良い素材は良い味を出してくれる。
+        その信頼に応えるために、仕入れに一番時間をかけています。<br><br>
+        毎朝、生産者から直接届く食材だけを使います。
+        献立はその日の素材を見てから決める。
+        決まった型より、目の前のものを大切に。
+      </p>
+      <div style="margin-top: 32px;">
+        <a href="about.html" class="btn-outline">こだわりを詳しく見る</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ピックアップ -->
+<div class="pickup-grid reveal">
+  <a href="menu.html" class="pickup-item">
+    <div class="pickup-thumb"></div>
+    <div class="pickup-label">MENU</div>
+    <div class="pickup-title">メニュー</div>
+    <p class="pickup-text">おまかせコースから単品まで。<br>季節の素材で組む、一期一会の献立。</p>
+    <span class="pickup-more">メニューを見る →</span>
+  </a>
+  <a href="space.html" class="pickup-item">
+    <div class="pickup-thumb"></div>
+    <div class="pickup-label">SPACE</div>
+    <div class="pickup-title">空間</div>
+    <p class="pickup-text">全席個室。静かな時間の中で、<br>大切な方とのひとときを。</p>
+    <span class="pickup-more">空間を見る →</span>
+  </a>
+  <a href="access.html" class="pickup-item">
+    <div class="pickup-thumb"></div>
+    <div class="pickup-label">ACCESS</div>
+    <div class="pickup-title">アクセス・予約</div>
+    <p class="pickup-text">北新地駅より徒歩3分。<br>完全予約制でご用意しています。</p>
+    <span class="pickup-more">アクセスを見る →</span>
+  </a>
+</div>
+
+<!-- お知らせ -->
+<div class="news-bg">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">NEWS</span>
+      <h2 class="section-title">お知らせ</h2>
+    </div>
+    <div class="news-list reveal">
+      <a href="#" class="news-item">
+        <span class="news-date">2026.04.01</span>
+        <span>春のおまかせコースが始まりました。蕗の薹・筍など春の食材をふんだんに。</span>
+      </a>
+      <a href="#" class="news-item">
+        <span class="news-date">2026.03.15</span>
+        <span>GW期間中（4/29〜5/5）の営業についてのご案内</span>
+      </a>
+      <a href="#" class="news-item">
+        <span class="news-date">2026.03.01</span>
+        <span>日本酒ラインナップを更新しました。新潟・十日町の限定銘柄が入荷。</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- アクセス概要 -->
+<div class="section-block">
+  <div class="reveal">
+    <span class="section-label">ACCESS</span>
+    <h2 class="section-title">アクセス</h2>
+  </div>
+  <div class="access-bar reveal">
+    <div class="access-bar-item">
+      <div class="access-bar-label">LOCATION</div>
+      <div class="access-bar-val">大阪府大阪市北区堂島<br>北新地エリア</div>
+    </div>
+    <div class="access-bar-item">
+      <div class="access-bar-label">ACCESS</div>
+      <div class="access-bar-val">北新地駅より徒歩3分<br>梅田駅より徒歩8分</div>
+    </div>
+    <div class="access-bar-item">
+      <div class="access-bar-label">HOURS</div>
+      <div class="access-bar-val">17:30〜23:00<br>（L.O. 21:30）</div>
+    </div>
+    <div class="access-bar-item">
+      <div class="access-bar-label">CLOSED</div>
+      <div class="access-bar-val">日曜日・月曜日<br>完全予約制</div>
+    </div>
+  </div>
+  <div style="margin-top: 32px; text-align: center;">
+    <a href="access.html" class="btn-outline">詳細・ご予約はこちら</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">
+    炭火割烹 結
+    <span>© 2026 SUMIBIYAKATA YUI. ALL RIGHTS RESERVED.</span>
+  </div>
+  <div class="footer-copy">大阪市北区堂島 / 完全予約制</div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
