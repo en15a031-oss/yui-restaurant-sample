@@ -22,9 +22,10 @@
     .hero-bg {
       position: absolute;
       inset: 0;
+      /* Unsplash License: free for commercial use, no attribution required */
       background:
         linear-gradient(to bottom, rgba(26,18,9,0.2) 0%, rgba(26,18,9,0.55) 55%, var(--bg) 100%),
-        radial-gradient(ellipse at 60% 40%, #6b4520 0%, #1a1209 70%);
+        url('https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
     }
     .hero-content {
       position: relative;
@@ -106,19 +107,12 @@
     }
     .concept-img {
       aspect-ratio: 4/5;
-      background: linear-gradient(135deg, #3d2810 0%, #6b4520 50%, #2a1c0c 100%);
+      /* Unsplash License: free for commercial use, no attribution required */
+      background: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
       position: relative;
     }
     .concept-img::after {
-      content: '写真';
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255,255,255,0.08);
-      font-size: 0.75rem;
-      letter-spacing: 0.3em;
+      content: '';
     }
 
     /* ── ピックアップリンク ── */
@@ -141,20 +135,23 @@
     .pickup-item:hover { background: var(--bg-mid); }
     .pickup-thumb {
       aspect-ratio: 3/2;
-      background: linear-gradient(135deg, #3d2810, #5c3a1e);
+      background-size: cover;
+      background-position: center;
       margin-bottom: 24px;
       position: relative;
     }
     .pickup-thumb::after {
-      content: '写真';
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255,255,255,0.08);
-      font-size: 0.7rem;
-      letter-spacing: 0.3em;
+      content: '';
+    }
+    /* Unsplash License: free for commercial use, no attribution required */
+    .pickup-item:nth-child(1) .pickup-thumb {
+      background-image: url('https://images.unsplash.com/photo-1540189549336-e6e99eb4b73a?auto=format&fit=crop&w=600&q=80');
+    }
+    .pickup-item:nth-child(2) .pickup-thumb {
+      background-image: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80');
+    }
+    .pickup-item:nth-child(3) .pickup-thumb {
+      background-image: url('https://images.unsplash.com/photo-1490730141103-6cac27aaab94?auto=format&fit=crop&w=600&q=80');
     }
     .pickup-label {
       font-size: 0.62rem;
